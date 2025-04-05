@@ -13,9 +13,9 @@ import javax.mail.internet.MimeMessage;
 public class EmailSender {
 
     private static final String EMAIL_HOST = "smtp.gmail.com";
-    private static final int EMAIL_PORT = 587;
-    private static final String EMAIL_USERNAME = "authentic321.sds@gmail.com";
-    private static final String EMAIL_PASSWORD = "leys wcol ojdp lgpd";
+    private static final int EMAIL_PORT = xxx;
+    private static final String EMAIL_USERNAME = "example@gmail.com";
+    private static final String EMAIL_PASSWORD = "xxxx xxxx xxxx xxxx";
 
     public static int sendEmail(String to, String subject, String body) {
         Properties props = new Properties();

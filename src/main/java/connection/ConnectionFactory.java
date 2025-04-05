@@ -9,9 +9,9 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 
     private static final String DRIVER = "org.postgresql.Driver";
-    private static final String URL = "jdbc:postgresql://localhost:5432/Service Order System";
-    private static final String USER = "postgres";
-    private static final String SENHA = "SDSsystem395248";
+    private static final String URL = "jdbc:postgresql://localhost:xxxx/xxxxxxxxxx";
+    private static final String USER = "xxxxxxxx";
+    private static final String SENHA = "xxxxxxxxxx";
 
     public static Connection getConnection() {
         try {

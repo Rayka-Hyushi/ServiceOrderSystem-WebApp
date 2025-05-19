@@ -1,23 +1,30 @@
 package connection;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class ConnectionFactory {
 
-    private static final String DRIVER = "org.postgresql.Driver";
-    private static final String URL = "jdbc:postgresql://localhost:xxxx/xxxxxxxxxx";
-    private static final String USER = "xxxxxxxx";
-    private static final String SENHA = "xxxxxxxxxx";
+    private static final Properties properties = new Properties();
+
+    static {
+        try {
+            properties.load(ConnectionFactory.class.getClassLoader().getResourceAsStream("db.properties"));
+            Class.forName(properties.getProperty("driver"));
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException("Erro ao carregar propriedades de conexão", e);
+        }
+    }
 
     public static Connection getConnection() {
         try {
-            Class.forName(DRIVER);
-            return DriverManager.getConnection(URL, USER, SENHA);
-        } catch (ClassNotFoundException | SQLException ex) {
+            return DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("user"), properties.getProperty("password"));
+        } catch (SQLException ex) {
             throw new RuntimeException("Erro na conexão com o Banco de Dados.", ex);
         }
     }

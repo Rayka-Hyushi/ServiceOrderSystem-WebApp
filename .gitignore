@@ -11,6 +11,8 @@ target/
 *.iws
 *.iml
 *.ipr
+src/main/resources/db.properties
+src/main/resources/mail.properties
 
 ### Eclipse ###
 .apt_generated

@@ -4,56 +4,20 @@ body {
     background-size: cover;
     background-image: url('../images/wallpaper.jpg');
     font-family: Arial, sans-serif;
-    color: white;
-    text-align: center;
 }
 
-/* Área de ícones */
-.desktop {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-.icon {
+.icon, .logout-icon {
     width: 100px;
     text-align: center;
-    margin: 10px;
     cursor: pointer;
 }
 
-.icon img {
+.icon img, .logout-icon img{
     width: 80px;
     height: 80px;
 }
 
-.icon p {
-    margin: 5px 0;
+.icon p, .logout-icon p {
+    margin: 5px;
     font-size: 14px;
-}
-
-/* Texto de boas-vindas */
-.welcome {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-h1 {
-    font-size: 28px;
-}
-
-h2 {
-    font-size: 20px;
-}
-
-/* Rodapé */
-footer {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: 12px;
 }

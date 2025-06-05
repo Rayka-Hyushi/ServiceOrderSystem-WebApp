@@ -13,6 +13,8 @@ target/
 *.ipr
 src/main/resources/db.properties
 src/main/resources/mail.properties
+src/main/resources/sos_db.sql
+src/main/java/main.java
 
 ### Eclipse ###
 .apt_generated
@@ -38,3 +40,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/src/main/java/main.java

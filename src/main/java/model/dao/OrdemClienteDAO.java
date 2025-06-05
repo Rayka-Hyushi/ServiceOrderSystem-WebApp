@@ -14,11 +14,8 @@ public class OrdemClienteDAO {
 
     private Connection con = null;
 
-    public OrdemClienteDAO() {
-        con = ConnectionFactory.getConnection();
-    }
-
     public boolean create(OrdemCliente oc) {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -40,6 +37,7 @@ public class OrdemClienteDAO {
     }
 
     public ArrayList<OrdemCliente> read() {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -73,6 +71,7 @@ public class OrdemClienteDAO {
     }
 
     public Cliente getCliente(int idcliente) {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Cliente cliente = new Cliente();
@@ -96,6 +95,7 @@ public class OrdemClienteDAO {
     }
     
     public OrdemCliente getOc(int osid) {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         OrdemCliente oc = new OrdemCliente();
@@ -118,6 +118,7 @@ public class OrdemClienteDAO {
     }
     
     public ArrayList<Servico> getServicos(int osid) {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -143,6 +144,7 @@ public class OrdemClienteDAO {
     }
 
     public boolean finish(OrdemCliente oc) {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -159,8 +161,31 @@ public class OrdemClienteDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-    
+
+    public boolean update(OrdemCliente oc) {
+        con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("update ordens_servico set descricao = ?, valor_total = ?, desconto = ?, extras = ? where idcliente = ? and osid = ?");
+            stmt.setString(1, oc.getDesc());
+            stmt.setDouble(2, oc.getTotal());
+            stmt.setDouble(3, oc.getDesconto());
+            stmt.setDouble(4, oc.getExtras());
+            stmt.setInt(5, oc.getCliente().getIdcliente());
+            stmt.setInt(6, oc.getOsid());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e);
+            return false;
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+
     public boolean apagar(OrdemCliente oc){
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         
         try {

@@ -1,71 +1,94 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.bean.Cliente;
 import model.bean.OrdemCliente;
-import model.bean.Servico;
-import model.dao.OrdemClienteDAO;
+import service.ClienteService;
+import service.OrdemClienteService;
+import service.OrdemServicoService;
 
-public class OrdemClienteController {
-    
-    public boolean create(Cliente cliente, String desc, double total, String status, double desconto, double extras) {
-        OrdemCliente oc = new OrdemCliente();
-        OrdemClienteDAO ordemclienteDAO = new OrdemClienteDAO();
-        
-        oc.setCliente(cliente);
-        oc.setDesc(desc);
-        oc.setTotal(total);
-        oc.setStatus(status);
-        oc.setDesconto(desconto);
-        oc.setExtras(extras);
-        
-        return ordemclienteDAO.create(oc);
+@WebServlet("/ordens")
+public class OrdemClienteController extends HttpServlet {
+    private final OrdemClienteService service = new OrdemClienteService();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        if (session == null || session.getAttribute("usuario") == null) {
+            resp.sendRedirect("index.jsp");
+            return;
+        }
+
+        String action = req.getParameter("action");
+
+        if (action == null) action = "";
+
+        switch (action) {
+            case "novo":
+                req.setAttribute("modo", "novo");
+                req.setAttribute("clientes", service.getClientes());
+                break;
+            case "editar":
+                int idOc = Integer.parseInt(req.getParameter("osid"));
+                int idCliente = Integer.parseInt(req.getParameter("cliente"));
+                OrdemCliente ordemCliente = service.getOc(idOc);
+                Cliente cliente = service.getCliente(idCliente);
+                ordemCliente.setCliente(cliente);
+                req.setAttribute("ordemClienteEdit", ordemCliente);
+                req.setAttribute("modo", "editar");
+                break;
+            case "excluir":
+                idOc = Integer.parseInt(req.getParameter("osid"));
+                idCliente = Integer.parseInt(req.getParameter("cliente"));
+                service.apagar(idCliente, idOc);
+                break;
+        }
+
+        ArrayList<OrdemCliente> ordens = service.read();
+        session.setAttribute("ordens", ordens);
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/pages/ordens.jsp");
+        dispatcher.forward(req, resp);
     }
-    
-    public ArrayList<OrdemCliente> read() {
-        OrdemClienteDAO ordemclienteDAO = new OrdemClienteDAO();
-        return ordemclienteDAO.read();
-    }
-    
-    public Cliente getCliente(int idcliente) {
-        OrdemClienteDAO ordemclienteDAO = new OrdemClienteDAO();
-        return ordemclienteDAO.getCliente(idcliente);
-    }
-    
-    public OrdemCliente getOc(int osid) {
-        OrdemClienteDAO ordemclienteDAO = new OrdemClienteDAO();
-        return ordemclienteDAO.getOc(osid);
-    }
-    
-    public ArrayList<Servico> getServicos(int osid) {
-        OrdemClienteDAO ordemclienteDAO = new OrdemClienteDAO();
-        return ordemclienteDAO.getServicos(osid);
-    }
-    
-    public boolean mudarstatus(String status, int idcliente, int osid) {
-        OrdemCliente oc = new OrdemCliente();
-        OrdemClienteDAO ordemclienteDAO = new OrdemClienteDAO();
-        
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int idcliente = Integer.parseInt(req.getParameter("idcliente"));
+        String desc = req.getParameter("desc");
+        double total = Double.parseDouble(req.getParameter("total"));
+        String status = req.getParameter("status");
+        double desconto = Double.parseDouble(req.getParameter("desconto"));
+        double extras = Double.parseDouble(req.getParameter("extras"));
+
+        OrdemCliente ordem = new OrdemCliente();
+        ordem.setDesc(desc);
+        ordem.setTotal(total);
+        ordem.setStatus(status);
+        ordem.setDesconto(desconto);
+        ordem.setExtras(extras);
+
         Cliente cliente = new Cliente();
         cliente.setIdcliente(idcliente);
-        
-        oc.setStatus(status);
-        oc.setCliente(cliente);
-        oc.setOsid(osid);
-        
-        return ordemclienteDAO.finish(oc);
-    }
-    
-    public boolean apagar(int idcliente, int osid){
-        OrdemCliente oc = new OrdemCliente();
-        OrdemClienteDAO ordemclienteDAO = new OrdemClienteDAO();
-        
-        Cliente cliente = new Cliente();
-        cliente.setIdcliente(idcliente);
-        
-        oc.setCliente(cliente);
-        oc.setOsid(osid);
-        
-        return ordemclienteDAO.apagar(oc);
+        ordem.setCliente(cliente);
+
+        String osidStr = req.getParameter("osid");
+        if (osidStr != null && !osidStr.isEmpty()) {
+            ordem.setOsid(Integer.parseInt(osidStr));
+            service.update(ordem.getDesc(), ordem.getTotal(), ordem.getCliente().getIdcliente(), ordem.getOsid(), ordem.getDesconto(), ordem.getExtras());
+        } else {
+            service.create(ordem.getCliente(), ordem.getDesc(), ordem.getTotal(), ordem.getStatus(), ordem.getDesconto(), ordem.getExtras());
+        }
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/pages/ordens.jsp");
+        dispatcher.forward(req, resp);
     }
 }

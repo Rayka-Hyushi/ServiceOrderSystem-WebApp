@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
+
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
@@ -21,10 +24,9 @@
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
 
-            <% String error = request.getParameter("error");
-                if ("1".equals(error)) { %>
+            <c:if test="${error == '1'}">
                 <div class="alert alert-danger mt-2">Usuário ou senha inválidos</div>
-            <% } %>
+            </c:if>
 
             <button type="submit" class="btn btn-primary w-100">Entrar</button>
         </form>

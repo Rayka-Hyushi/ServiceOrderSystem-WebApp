@@ -12,11 +12,8 @@ public class ServicoDAO {
 
     private Connection con = null;
 
-    public ServicoDAO() {
-        con = ConnectionFactory.getConnection();
-    }
-
     public boolean create(Servico servico) {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -35,6 +32,7 @@ public class ServicoDAO {
     }
 
     public ArrayList<Servico> read() {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -61,6 +59,7 @@ public class ServicoDAO {
     }
 
     public boolean update(Servico servico) {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -80,6 +79,7 @@ public class ServicoDAO {
     }
 
     public boolean delete(Servico servico) {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {

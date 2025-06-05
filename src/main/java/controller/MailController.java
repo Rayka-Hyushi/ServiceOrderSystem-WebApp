@@ -15,7 +15,7 @@ public class MailController {
 
     public StringBuilder mailbuilder = new StringBuilder();
     private String body = "";
-    private Connection con = null;
+    private Connection con;
     private int totalOrdens;
     public static final int ERRO_INTERNO = 500;
     public static final int SUCESSO = 200;
@@ -26,7 +26,7 @@ public class MailController {
 
     public int contaOrdens(int id) {
         PreparedStatement stmt = null;
-        ResultSet rs = null;
+        ResultSet rs;
         int total = 0;
 
         try {

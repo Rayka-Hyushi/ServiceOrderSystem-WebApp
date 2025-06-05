@@ -12,11 +12,8 @@ public class ClienteDAO {
 
     private Connection con = null;
 
-    public ClienteDAO() {
-        con = ConnectionFactory.getConnection();
-    }
-
     public boolean create(Cliente cliente) {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -36,6 +33,7 @@ public class ClienteDAO {
     }
 
     public ArrayList<Cliente> read() {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -63,6 +61,7 @@ public class ClienteDAO {
     }
 
     public boolean update(Cliente cliente) {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -83,6 +82,7 @@ public class ClienteDAO {
     }
 
     public boolean delete(Cliente cliente) {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -98,4 +98,31 @@ public class ClienteDAO {
         }
     }
 
+    public Cliente findById(int id) {
+        con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Cliente cliente = null;
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM cliente WHERE idcliente = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                cliente = new Cliente();
+                cliente.setIdcliente(rs.getInt("idcliente"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setTelefone(rs.getString("telefone"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setEndereco(rs.getString("endereco"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
+        return cliente;
+    }
 }

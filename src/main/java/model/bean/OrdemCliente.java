@@ -41,7 +41,7 @@ public class OrdemCliente {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
     public Cliente getCliente() {
         return cliente;
     }

@@ -1,11 +1,13 @@
 package model.dao;
 
 import connection.ConnectionFactory;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import model.bean.OrdemCliente;
 import model.bean.OrdemServico;
 import model.bean.Servico;
@@ -13,11 +15,8 @@ import model.bean.Servico;
 public class OrdemServicoDAO {
     private Connection con = null;
 
-    public OrdemServicoDAO() {
-        con = ConnectionFactory.getConnection();
-    }
-
     public boolean create(OrdemServico os) {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {
@@ -33,8 +32,9 @@ public class OrdemServicoDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-    
+
     public ArrayList<Servico> read(int osid) {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -60,29 +60,9 @@ public class OrdemServicoDAO {
         }
         return listaServico;
     }
-    
-    public boolean update(OrdemCliente oc) {
-        PreparedStatement stmt = null;
-
-        try {
-            stmt = con.prepareStatement("update ordens_servico set descricao = ?, valor_total = ?, desconto = ?, extras = ? where idcliente = ? and osid = ?");
-            stmt.setString(1, oc.getDesc());
-            stmt.setDouble(2, oc.getTotal());
-            stmt.setDouble(3, oc.getDesconto());
-            stmt.setDouble(4, oc.getExtras());
-            stmt.setInt(5, oc.getCliente().getIdcliente());
-            stmt.setInt(6, oc.getOsid());
-            stmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            System.out.println("Erro: " + e);
-            return false;
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt);
-        }
-    }
 
     public boolean delete(OrdemServico os) {
+        con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {

@@ -2,6 +2,7 @@ package controller;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import model.bean.Usuario;
@@ -13,6 +14,7 @@ import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+@MultipartConfig
 @WebServlet("/usuario")
 public class UsuarioController extends HttpServlet {
     private final UsuarioService usuarioService = new UsuarioService();
@@ -36,16 +38,21 @@ public class UsuarioController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+        System.out.println("Chegou no POST");
+        req.getParameterMap().forEach((key, value) -> {
+            System.out.println("Param: " + key + " -> " + String.join(",", value));
+        });
 
         Usuario usuario = null;
         if ("alterar".equals(action)) {
-            UsuarioService usuarioService = new UsuarioService();
+            System.out.println("Action: " + action);
+
             HttpSession session = req.getSession();
             usuario = (Usuario) session.getAttribute("usuario");
 
             String nome = req.getParameter("username");
             System.out.println("username = " + nome);
-            String email = criptografar(req.getParameter("email"));
+            String email = req.getParameter("email");
             System.out.println("email = " + email);
             String senhaRaw = req.getParameter("password");
             System.out.println("password = " + senhaRaw);
@@ -56,7 +63,9 @@ public class UsuarioController extends HttpServlet {
                 senha = usuarioService.buscar(usuario.getId()).getSenha();
                 System.out.println("senha = " + senha);
             }
+            System.out.println("Antes de pegar a imagem");
             Part filePart = req.getPart("foto");
+            System.out.println("Pegou a imagem");
             byte[] imagem = null;
             if (filePart != null && filePart.getSize() > 0) {
                 imagem = filePart.getInputStream().readAllBytes();
@@ -70,13 +79,20 @@ public class UsuarioController extends HttpServlet {
             usuario.setSenha(senha);
             usuario.setFoto(imagem);
 
-            usuarioService.alterar(usuario);
+            try {
+                usuarioService.alterar(usuario);
+                System.out.println("Alteração realizada com sucesso!");
+            } catch (Exception e) {
+                e.printStackTrace();
+                resp.getWriter().println("Erro ao alterar usuário: " + e.getMessage());
+                return;
+            }
 
-            resp.sendRedirect("home");
+            resp.sendRedirect(req.getContextPath() + "/home");
             return;
         } else if ("cadastrar".equals(action)) {
             String nome = req.getParameter("username");
-            String email = criptografar(req.getParameter("email"));
+            String email = req.getParameter("email");
             String password = criptografar(req.getParameter("password"));
 
             Usuario novoUsuario = new Usuario();
@@ -102,7 +118,6 @@ public class UsuarioController extends HttpServlet {
                 resp.sendRedirect("/WEB-INF/pages/cadastrar.jsp");
             }
         }
-
     }
 
     private String criptografar(String senha) {

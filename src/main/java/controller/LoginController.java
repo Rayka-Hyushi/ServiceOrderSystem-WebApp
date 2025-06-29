@@ -14,7 +14,6 @@ import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-@MultipartConfig
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
     private final LoginService loginService = new LoginService();
@@ -46,7 +45,7 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = criptografar(req.getParameter("email"));
+        String email = req.getParameter("email");
         String password = criptografar(req.getParameter("password"));
 
         Usuario usuario;

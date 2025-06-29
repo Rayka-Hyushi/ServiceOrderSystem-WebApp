@@ -10,4 +10,4 @@ COPY --from=build /app/target/ServiceOrderSystem.war /usr/local/tomcat/webapps/R
 
 EXPOSE 8080
 
-ENTRYPOINT ["catalina.sh", "run"]d
+ENTRYPOINT ["/usr/local/tomcat/bin/catalina.sh", "run"]

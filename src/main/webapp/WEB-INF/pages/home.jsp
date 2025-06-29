@@ -23,7 +23,7 @@
                     <strong>${usuario.nome}</strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-small">
-                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalFoto">Alterar Foto</a></li>
+                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalFoto">Editar Perfil</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="login?action=logout">Sair</a></li>
                 </ul>
@@ -67,9 +67,7 @@
         <!-- Alterar Foto -->
         <div class="modal fade" id="modalFoto" tabindex="-1" aria-labelledby="modalFotoLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <form method="post" action="usuario" enctype="multipart/form-data" class="modal-content">
-                    <input type="hidden" name="action" value="alterar">
-
+                <form action="usuario" method="post" enctype="multipart/form-data" class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalFotoLabel">Meu Perfil</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
@@ -77,19 +75,22 @@
 
                     <div class="modal-body">
                         <div class="mb-3 text-start">
+                            <input type="hidden" name="action" value="alterar">
+                        </div>
+
+                        <div class="mb-3 text-start">
                             <label for="username" class="form-label">Nome</label>
                             <input type="text" class="form-control" id="username" name="username" value="${usuario.nome}" required>
                         </div>
 
                         <div class="mb-3 text-start">
                             <label for="email" class="form-label">Email</label>
-                            <!-- Se quiser mostrar o email sem criptografia, tem que alterar o controller, mas vamos supor que a gente só mostra vazio -->
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" value="${usuario.email}" required>
                         </div>
 
                         <div class="mb-3 text-start">
                             <label for="password" class="form-label">Senha</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Digite nova senha">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Digite a nova senha se desejar">
                         </div>
 
                         <div class="mb-3 text-start">

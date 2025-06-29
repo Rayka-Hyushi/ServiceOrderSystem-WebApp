@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-size: cover;
+    background-image: url('../images/wallpaper.jpg');
+    font-family: Arial, sans-serif;
+}
+
+.icon, .logout-icon {
+    width: 100px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.icon img, .logout-icon img{
+    width: 80px;
+    height: 80px;
+}
+
+.icon p, .logout-icon p {
+    margin: 5px;
+    font-size: 14px;
+}

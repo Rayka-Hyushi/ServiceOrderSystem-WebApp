@@ -11,10 +11,6 @@ target/
 *.iws
 *.iml
 *.ipr
-src/main/resources/db.properties
-src/main/resources/mail.properties
-../SOS Web Spring/src/main/resources/sos_db.sql
-docker-compose.yaml
 
 ### Eclipse ###
 .apt_generated

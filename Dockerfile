@@ -9,3 +9,5 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 COPY --from=build /app/target/ServiceOrderSystem.war /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8080
+
+ENTRYPOINT ["catalina.sh", "run"]d

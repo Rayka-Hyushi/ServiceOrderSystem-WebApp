@@ -25,6 +25,7 @@ Pré-requisitos: Docker desktop instalado e em execução, além de alguma ferra
 Crie uma pasta vazia no seu computador
 
 Baixe o Dockerfile, docker-compose.yaml e sos_db.sql na release mais recente e coloque-os nessa pasta que criou
+Download aqui: https://github.com/Rayka-Hyushi/ServiceOrderSystem-WebApp/releases
 
 Abra o terminal (PowerShell, cmd ou outro) e navegue até a pasta
 

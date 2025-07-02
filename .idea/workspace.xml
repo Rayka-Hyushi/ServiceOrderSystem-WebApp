@@ -12,6 +12,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ab8773bd-8b6c-468d-9544-2589562a2898" name="Changes" comment="Updated system to start to work with multiusers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,6 +251,7 @@
       <workItem from="1751137008205" duration="24147000" />
       <workItem from="1751406611808" duration="1070000" />
       <workItem from="1751407709734" duration="13000" />
+      <workItem from="1751416473264" duration="614000" />
     </task>
     <task id="LOCAL-00001" summary="Improvised session control and first page">
       <option name="closed" value="true" />

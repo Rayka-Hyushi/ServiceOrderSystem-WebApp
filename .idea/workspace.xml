@@ -11,22 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab8773bd-8b6c-468d-9544-2589562a2898" name="Changes" comment="Updated system to start to work with multiusers">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/cadastrar.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/connection/ConnectionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connection/ConnectionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ClienteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/OrdemClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/OrdemClienteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/PerfilController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/PerfilController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/bean/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/bean/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/bean/OrdemCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/bean/OrdemCliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/bean/Servico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/bean/Servico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/ClienteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/ClienteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/OrdemClienteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/OrdemClienteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/OrdemClienteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/OrdemClienteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/clientes.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/clientes.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,7 +247,9 @@
       <workItem from="1750973396351" duration="8000" />
       <workItem from="1750981555972" duration="9000" />
       <workItem from="1751052720211" duration="271000" />
-      <workItem from="1751137008205" duration="23514000" />
+      <workItem from="1751137008205" duration="24147000" />
+      <workItem from="1751406611808" duration="1070000" />
+      <workItem from="1751407709734" duration="13000" />
     </task>
     <task id="LOCAL-00001" summary="Improvised session control and first page">
       <option name="closed" value="true" />

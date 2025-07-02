@@ -5,26 +5,22 @@ A aplicação permite o cadastro e gerenciamento de clientes e serviços e orden
 
 Tecnologias Utilizadas
 Java 21
-
 Maven
-
 Tomcat 10
-
 PostgreSQL
-
 Docker & Docker Compose
 
 Execução com Docker
 Para facilitar o deploy da aplicação em ambiente virtualizado, foram criados um Dockerfile e um docker-compose.yaml que permitem:
 
-✅ Clonar o projeto diretamente do GitHub dentro do container
-✅ Realizar o build do projeto automaticamente
-✅ Subir o banco de dados PostgreSQL
-✅ Expor o sistema na porta 8080
-✅ Mapear os logs do Tomcat para a máquina host
+✅ Clonar o projeto diretamente do GitHub dentro do container 
+✅ Realizar o build do projeto automaticamente 
+✅ Subir o banco de dados PostgreSQL 
+✅ Expor o sistema na porta 8080 
+✅ Mapear os logs do Tomcat para a máquina host 
 
 Como Executar
-Pré-requisitos: Docker desktop instalado e em execução.
+Pré-requisitos: Docker desktop instalado e em execução, além de alguma ferramenta capaz de se conectar ao banco postgres.
 
 Crie uma pasta vazia no seu computador
 
